@@ -74,11 +74,11 @@ class BBcodeGenerator private (rootNode: RootNode) extends Visitor {
   }
 
   def visit(node: CodeNode) {
-    openTag("code")
-    newline()
+    openTag("font=courier new,courier,monospace")
+    openTag("color=#008080")
     text(node.getText)
-    closeTag("code")
-    newline()
+    closeTag("color")
+    closeTag("font")
   }
 
   def visit(node: DefinitionListNode) {
@@ -110,12 +110,12 @@ class BBcodeGenerator private (rootNode: RootNode) extends Visitor {
   }
 
   def visit(node: HeaderNode) {
-    openTag("size=" + (6 - node.getLevel))
-    openTag("b")
-    visitChildren(node)
-    closeTag("b")
-    closeTag("size")
     newline()
+    openTag("font=lucida sans unicode,lucida grande,sans-serif")
+    openTag("size=" + (8 - node.getLevel))
+    visitChildren(node)
+    closeTag("size")
+    closeTag("font")
     newline()
   }
 
@@ -248,7 +248,6 @@ class BBcodeGenerator private (rootNode: RootNode) extends Visitor {
 
   def visit(node: VerbatimNode) {
     openTag("code")
-    newline()
     text(node.getText)
     closeTag("code")
     newline()
